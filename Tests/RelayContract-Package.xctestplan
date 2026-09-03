@@ -1,0 +1,26 @@
+{
+  "configurations" : [
+    {
+      "id" : "5E0C3B2A-9D41-4F6E-A2B7-1C8D9E0F3A47",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "language" : "en",
+    "region" : "US",
+    "performanceAntipatternCheckerEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "RelayContractTests",
+        "name" : "RelayContractTests"
+      }
+    }
+  ],
+  "version" : 1
+}
