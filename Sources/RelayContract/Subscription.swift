@@ -84,6 +84,18 @@ public struct ProductConnection: Hashable, Codable, Sendable, Identifiable {
     }
 }
 
+/// `PUT /v1/subscription/runs/<runID>/activity-token` (M7 lot 3): the
+/// hex-encoded ActivityKit update token of the Live Activity the relay's
+/// push-to-start opened on this device. The relay ends that activity with
+/// it; the push-to-start token alone cannot address an activity.
+public struct LiveActivityTokenRegistration: Hashable, Codable, Sendable {
+    public let token: String
+
+    public init(token: String) {
+        self.token = token
+    }
+}
+
 /// `GET /v1/subscription`: what the relay knows about this device.
 public struct SubscriptionStatus: Hashable, Codable, Sendable {
     public let products: [ProductConnection]

@@ -21,8 +21,25 @@ public enum RelayRoutes {
     public static let subscription = "/v1/subscription"
     /// `POST` to receive a test notification on the registered device.
     public static let subscriptionTest = "/v1/subscription/test"
+    /// `PUT` a `LiveActivityTokenRegistration` (M7 lot 3): the update token
+    /// of the Live Activity a push-to-start opened for this run, rotated
+    /// whenever ActivityKit hands a new one over. The server registers the
+    /// pattern; the client builds the path with `activityTokenPath(runID:)`.
+    public static let activityTokenPattern = "/v1/subscription/runs/{runID}/activity-token"
+    /// `POST` (M7 lot 3, D-0175 amendment (b)): the app ended the run's
+    /// Live Activity itself — cancellation seen at a tick, or the poll got
+    /// there first — so the relay stops ticking and will not push an end.
+    public static let runTerminatedPattern = "/v1/subscription/runs/{runID}/terminated"
     /// `GET /health` → `ok`.
     public static let health = "/health"
+
+    public static func activityTokenPath(runID: String) -> String {
+        "/v1/subscription/runs/\(runID)/activity-token"
+    }
+
+    public static func runTerminatedPath(runID: String) -> String {
+        "/v1/subscription/runs/\(runID)/terminated"
+    }
 
     /// The path Xcode Cloud posts to for one device.
     public static func hookPath(token: String) -> String {

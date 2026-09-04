@@ -64,3 +64,20 @@ struct SubscriptionTests {
         #expect(RelayRoutes.hookPath(token: "abc") == "/hooks/abc")
     }
 }
+
+@Suite("RelayRoutes — Live Activity (lot 3)")
+struct LiveActivityRoutesTests {
+    @Test("Per-run paths match the server's patterns")
+    func paths() {
+        #expect(RelayRoutes.activityTokenPath(runID: "run-1") == "/v1/subscription/runs/run-1/activity-token")
+        #expect(RelayRoutes.runTerminatedPath(runID: "run-1") == "/v1/subscription/runs/run-1/terminated")
+        #expect(RelayRoutes.activityTokenPattern.replacingOccurrences(of: "{runID}", with: "run-1") == RelayRoutes.activityTokenPath(runID: "run-1"))
+        #expect(RelayRoutes.runTerminatedPattern.replacingOccurrences(of: "{runID}", with: "run-1") == RelayRoutes.runTerminatedPath(runID: "run-1"))
+    }
+
+    @Test("The activity token registration is one hex string on the wire")
+    func tokenRegistration() throws {
+        let data = try JSONEncoder().encode(LiveActivityTokenRegistration(token: "c0ffee"))
+        #expect(String(decoding: data, as: UTF8.self) == #"{"token":"c0ffee"}"#)
+    }
+}

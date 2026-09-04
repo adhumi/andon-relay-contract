@@ -82,6 +82,10 @@ public enum RelayNotificationText {
     public static let testTitleKey = "relay.notification.test.title"
     public static let testBodyKey = "relay.notification.test.body"
 
+    /// Title of the alert a push-to-start must carry (M7 lot 3): `%1$@`
+    /// product name, `%2$@` build number. The body reuses the workflow keys.
+    public static let activityStartTitleKey = "relay.notification.activityStart.title"
+
     /// Every key the app's catalog must carry.
     public static let allKeys: [String] = [
         titleKeySucceeded,
@@ -90,5 +94,6 @@ public enum RelayNotificationText {
         bodyKeyWorkflowOnly,
         testTitleKey,
         testBodyKey,
+        activityStartTitleKey,
     ]
 }
